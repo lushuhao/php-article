@@ -7,7 +7,7 @@
  */
     require_once ('../connect.php');
     $id = $_GET['id'];
-    $deleteSql = 'delete from article where id=2';
+    $deleteSql = "delete from article where id=$id";
 if (mysqli_query($con, $deleteSql)){
     echo "<script>alert('文章删除成功');</script>";
 } else {
