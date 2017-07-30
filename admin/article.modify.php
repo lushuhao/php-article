@@ -1,0 +1,165 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: lu
+ * Date: 2017/7/29
+ * Time: 22:02
+ */
+
+    require_once ('../connect.php');
+    $id = $_GET['id'];
+    $query = mysqli_query($con, "select * from article where id = $id");
+    $data = mysqli_fetch_assoc($query);
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改文章</title>
+    <link rel="stylesheet" href="reset.css"/>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            padding: 20px;
+            border-bottom: 1px solid #dcdcdc;
+        }
+
+        .header .title {
+            font-size: 20px;
+            font-weight: 400;
+        }
+
+        .main {
+            flex: 1;
+            display: flex;
+        }
+
+        .nav {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 30px;
+            width: 150px;
+        }
+
+        .nav a {
+            padding-bottom: 30px;
+            color: #20c1c0;
+            white-space: nowrap;
+        }
+
+        .form {
+            flex: 1;
+            display: flex;
+            flex-direction:column;
+        }
+
+        .article {
+            box-sizing: border-box;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            height: 100%;
+            border-left: 1px solid #dcdcdc;
+        }
+
+        .article_wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .article-input_wrapper {
+            display: flex;
+            align-items: center;
+            padding-bottom: 20px;
+        }
+
+        .article-input_wrapper:last-child {
+            flex: 1;
+        }
+
+        .article-title {
+            padding-bottom: 20px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .article-input_title {
+            padding-right: 40px;
+            white-space: nowrap;
+        }
+
+        .article-input {
+            padding: 5px;
+            border: 1px solid #dcdcdc;
+        }
+
+        .article-textArea {
+            flex: 1;
+            border: 1px solid #dcdcdc;
+            padding: 5px;
+        }
+
+        .article-input_wrapper:last-child .article-textArea {
+            height: 100%;
+        }
+        .article-footer{
+            display: flex;
+            justify-content: center;
+        }
+        .submit {
+            padding: 5px;
+            background-color: #317EF3;
+            color: #fff;
+        }
+        .submit:hover{
+            cursor: pointer;
+            background-color: #417EF3;
+        }
+    </style>
+</head>
+<body>
+<header class="header">
+    <h1 class="title">后台管理系统</h1>
+</header>
+<section class="main">
+    <nav class="nav">
+        <a href="article.add.html">发布文章</a>
+        <a href="article.manage.php">管理文章</a>
+    </nav>
+    <section class="article">
+        <header class="article-title">修改文章</header>
+        <form id="form" class="form" name="form" method="post" action="article.modify.handle.php">
+            <section class="article_wrapper">
+                <div class="article-input_wrapper">
+                    <span class="article-input_title">标题</span>
+                    <input placeholder="请输入文章标题" name="title" class="article-input" value="<?php echo $data['title']?>"/>
+                </div>
+                <div class="article-input_wrapper">
+                    <span class="article-input_title">作者</span>
+                    <input placeholder="请输入文章作者" name="author" class="article-input"value="<?php echo $data['author']?>"/>
+                </div>
+                <div class="article-input_wrapper">
+                    <span class="article-input_title">简介</span>
+                    <textarea rows="5" placeholder="请输入文章简介" name="description" class="article-textArea"><?php echo $data['description']?></textarea>
+                </div>
+                <div class="article-input_wrapper">
+                    <span class="article-input_title">内容</span>
+                    <textarea placeholder="请输入文章内容" name="content" class="article-textArea"><?php echo $data['content']?></textarea>
+                </div>
+            </section>
+            <footer class="article-footer">
+                <input class="submit" type="submit" value="提交"/>
+            </footer>
+            <input type="hidden" name="id" value="<?php echo $data['id']?>">
+        </form>
+    </section>
+</section>
+</body>
+</html>
