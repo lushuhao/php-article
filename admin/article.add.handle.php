@@ -18,7 +18,7 @@
     $dateline = time();
     $insertSql = "insert into article(title, author, description, content, dateline) values('$title','$author', '$description', '$content', '$dateline')";
      if (mysqli_query($con, $insertSql)){
-         echo "<script>alert('文章发布成功');window.location.href='article.add.html';</script>";
+         echo "<script>alert('文章发布成功');window.location.href='article.manage.php';</script>";
     } else {
-         echo "<script>alert('文章发布失败');window.location.href='article.add.html';</script>";
+         echo "<script>alert('文章发布失败');window.location.href='article.manage.php';</script>";
      }
